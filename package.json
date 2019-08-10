@@ -1,0 +1,13 @@
+{
+  "name": "@lapress/page-builder",
+  "version": "0.0.0",
+  "description": "Page builder for laPress sites",
+  "main": "index.js",
+  "author": "Sebastian Szczepanski <sebastian@ably.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "@lapress/frontend-core": "^0.0.1",
+    "vue-blu": "^0.1.9",
+    "vuedraggable": "^2.23.0"
+  }
+}
