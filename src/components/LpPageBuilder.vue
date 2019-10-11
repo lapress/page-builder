@@ -4,43 +4,67 @@
       <button class="lp button is-info" @click.prevent="openModuleList">
         Dodaj moduł
       </button>
-      <button class="lp button is-success" @click.prevent="save">
+      <button class="lp button is-success" type="submit">
         Zapisz zmiany
       </button>
 
       <template v-slot:middle>
-        <Counter label="Moduły" :count="count" />
-        <Counter label="Ilosc wpisow" :count="count" />
+        <a href="#" class="" @click.prevent="showListPanel = true">
+          <Counter label="Moduły" :count="count"/>
+        </a>
+
+        <Counter label="Ilosc wpisow" :count="postCount"/>
       </template>
     </LpNavigationBar>
-
-    <LpModuleMapper v-model="sections" />
-
-    <b-aside :is-show="showAddPanel" placement="right" title="Dodawanie modułu" ok-text="wstaw" @close="showAddPanel = false">
-      <a v-for="module in Object.keys($lapress.pages.modules)" href="#" :key="module" @click.prevent="addModule(module)" v-text="module"></a>
+    <LpModuleMapper v-model="sections" class="container m-mapper"/>
+    <b-aside :is-show="showAddPanel" placement="right" title="Dodawanie modułu" :show-ok="false" :show-cancel="false" @close="showAddPanel = false">
+     <SidebarMenu @add="addModule" />
+    </b-aside>
+    <b-aside :is-show="showListPanel" placement="right" title="Lista Modułów" :show-ok="false" :show-cancel="false" @close="showListPanel = false">
+      <SectionsList v-model="sections" />
     </b-aside>
   </div>
 </template>
 
 <script>
-import { KEY } from "../../index";
-import Counter from "./atoms/Counter";
+import uuid from 'uuid'
+import { KEY } from "../../index"
+import Counter from "./atoms/Counter"
 
+const SidebarMenu = () => import(/* webpackChunkName: "lapress-blocks-pb-sidebar-menu" */ './blocks/SidebarMenu')
+const SectionsList = () => import(/* webpackChunkName: "lapress-blocks-pb-sidebar-menu" */ './blocks/SectionsList')
 const LpModuleMapper = () => import(/* webpackChunkName: "lapress-module-mapper" */ './LpModuleMapper')
 
 export default {
   name: 'LpPageBuilder',
-  components: { LpModuleMapper, Counter },
-  data: () => ({
-    showAddPanel: false,
-    sections: []
-  }),
+  components: {
+    LpModuleMapper,
+    SidebarMenu,
+    SectionsList,
+    Counter
+  },
+  props: {
+    value: {
+      type: Array,
+      default: () => []
+    },
+  },
+  data(){
+    return {
+      showAddPanel: false,
+      showListPanel: false,
+      sections: this.value
+    }
+  },
   computed: {
     count() {
-      return 123;
+      return this.sections.length
+    },
+    postCount() {
+      return this.sections.reduce((sum, section) => sum + section.module.count, 0)
     },
     config() {
-      return this.$lapress[KEY];
+      return this.$lapress[KEY]
     }
   },
   watch: {
@@ -49,31 +73,45 @@ export default {
     },
   },
   mounted() {
-    this.$bus.$on('pageBuilder.module.remove', id => this.removeSection(id))
+    this.$bus.$on('pageBuilder.module.remove', this.removeSection)
+    this.$bus.$on('pageBuilder.module.add',  this.addModule)
   },
   methods: {
     openModuleList() {
-      this.showAddPanel = true;
+      this.showAddPanel = true
     },
     removeSection(id) {
-      const module = this.sections.find(module => module.id === id)
-      const index = this.sections.indexOf(module)
-
-      this.sections.splice(index, 0)
+      const section = this.sections.find(section => section.module.id === id)
+      const index = this.sections.indexOf(section)
+      this.sections.splice(index, 1)
+    },
+    addModule(key) {
+      const _module = this.$lapress.pages.modules[key]
+      const config = JSON.parse(JSON.stringify(_module.config))
+      const section = {
+        type: _module.name,
+        module: {
+          id: uuid.v4(),
+          ...config
+        }
+      }
+      this.sections.push(Object.assign({}, section))
     },
   },
-};
+}
 </script>
 
 <style lang="scss">
-$family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$blue: #0073aa;
+@import '~@lapress/frontend-core/src/sass/blu.scss';
 
-@import "~vue-blu/src/scss/blu";
+.m-mapper {
+  /*padding: 20px 0;*/
+}
 
 .grid {
   margin-left: -20px;
 }
+
 .lp.button {
   box-shadow: none;
   border: none;

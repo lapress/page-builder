@@ -7,7 +7,12 @@
   "license": "MIT",
   "dependencies": {
     "@lapress/frontend-core": "^0.0.1",
+    "lodash.merge": "^4.6.2",
+    "uuid": "^3.3.3",
     "vue-blu": "^0.1.9",
     "vuedraggable": "^2.23.0"
+  },
+  "devDependencies": {
+    "@editorjs/editorjs": "^2.15.0"
   }
 }

@@ -1,25 +1,20 @@
 <template>
   <draggable v-model="items">
     <div v-for="(section, index) in items" :key="section.module.id" :data-index="index">
-      <component
-        :is="getComponentName(section)"
-        v-model="sections[index]"
-        :module="section.module"
-      />
+      <SectionListItem :id="section.module.id" :module="section.type" />
     </div>
   </draggable>
 </template>
 
 <script>
 import Draggable from 'vuedraggable';
-
-import { config } from '@lapress/frontend-core';
+import SectionListItem from "../atoms/SectionListItem";
 
 export default {
-  name: 'LpSectionMapper',
+  name: 'SectionsList',
   components: {
     Draggable,
-    ...config.pages.modules
+    SectionListItem
   },
   model: {
     prop: 'sections',
@@ -44,10 +39,10 @@ export default {
       this.items = sections
     }
   },
-  methods: {
-    getComponentName(section) {
-      return section.type;
-    },
+  mounted() {
+    this.$bus.$on('pageBuilder.sync', () => {
+      this.items = this.sections;
+    });
   },
 };
 </script>

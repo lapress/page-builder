@@ -1,3 +1,5 @@
+import merge from 'lodash.merge';
+
 const data = {
   key: null,
   menu: {
@@ -7,7 +9,6 @@ const data = {
     image: null
   },
   config: {
-    title: null,
     posts: [],
     count: 0
   },
@@ -18,10 +19,17 @@ const data = {
     }
   },
   data: () => ({
-    showMeta: false
+    showMeta: false,
+    isEditOpen: false,
   }),
 
-  mounted() {
+  computed: {
+    hasTitle() {
+      return this.module.title !== undefined;
+    },
+  },
+
+  created() {
     this.init();
   },
 
@@ -33,19 +41,25 @@ const data = {
       for (let i = 0; i < difference;i++) {
         this.module.posts.push({});
       }
-      this.$emit('init');
+      this.$emit('pageBuilder.module.init');
     },
     removeSection() {
-      this.$bus.$emit('pagebuilder', this.module.id);
+      this.$bus.$emit('pageBuilder.module.remove', this.module.id);
+    },
+    decorateImagePath(path) {
+      return path.replace('{theme}', this.$lapress.data.theme);
     },
   }
 };
 
 export const createModule = _module => {
+  const config = Object.assign({}, data.config);
+  const menu = Object.assign({}, data.menu);
+
   _module.mixins = [data];
-  _module.key = _module.key || data.key;
-  _module.config = Object.assign(data.config, _module.config);
-  _module.menu = Object.assign(data.menu, _module.menu);
+  _module.key = _module.key || data.key || _module.name;
+  _module.config = Object.assign({}, merge(config, _module.config));
+  _module.menu = Object.assign({}, merge(menu, _module.menu));
 
   return _module;
 };

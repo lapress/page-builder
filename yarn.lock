@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@editorjs/editorjs@^2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.15.0.tgz#7bb1cd38863e613be904a7e3d048a99590c9f5d9"
+  integrity sha512-qMuoihMgqlS6HAOQM+rAusmsByYW83kEL+PKn75DLTQh6BD5GbXt21rAotaMRuGOKl+pXoruq1etz/QNgIBCFA==
+  dependencies:
+    codex-notifier "^1.1.2"
+
 "@lapress/frontend-core@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@lapress/frontend-core/-/frontend-core-0.0.1.tgz#7d023295523b04ab152e2be6cf577202aee59030"
@@ -13,6 +20,11 @@ bulma@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.2.3.tgz#086394c65e74aa8081e658bdcf6742f81107936e"
   integrity sha1-CGOUxl50qoCB5li9z2dC+BEHk24=
+
+codex-notifier@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/codex-notifier/-/codex-notifier-1.1.2.tgz#a733079185f4c927fa296f1d71eb8753fe080895"
+  integrity sha512-DCp6xe/LGueJ1N5sXEwcBc3r3PyVkEEDNWCVigfvywAkeXcZMk9K41a31tkEFBW0Ptlwji6/JlAb49E3Yrxbtg==
 
 flatpickr@^2.2.4:
   version "2.6.3"
@@ -29,6 +41,11 @@ jump.js@^1.0.1:
   resolved "https://registry.yarnpkg.com/jump.js/-/jump.js-1.0.2.tgz#e0641b47f40a38f2139c25fda0500bf28e43015a"
   integrity sha1-4GQbR/QKOPITnCX9oFAL8o5DAVo=
 
+lodash.merge@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
+  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
 lodash@^4.17.2:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
@@ -43,6 +60,11 @@ sortablejs@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.9.0.tgz#2d1e74ae6bac2cb4ad0622908f340848969eb88d"
   integrity sha512-Ot6bYJ6PoqPmpsqQYXjn1+RKrY2NWQvQt/o4jfd/UYwVWndyO5EPO8YHbnm5HIykf8ENsm4JUrdAvolPT86yYA==
+
+uuid@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
+  integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
 
 vue-blu@^0.1.9:
   version "0.1.9"

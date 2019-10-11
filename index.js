@@ -1,4 +1,4 @@
-import { createModule } from 'lapress-frontend-core/src/utils/helpers';
+import { createModule } from '@lapress/frontend-core/src/utils/helpers';
 
 import Modules from './src/components/modules'
 
