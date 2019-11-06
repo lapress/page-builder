@@ -13,7 +13,10 @@
 <script>
 import Draggable from 'vuedraggable';
 
-import { config } from '@lapress/frontend-core';
+import {config} from '@lapress/frontend-core';
+
+// eslint-disable-next-line no-console
+console.log('config', config)
 
 export default {
   name: 'LpSectionMapper',
