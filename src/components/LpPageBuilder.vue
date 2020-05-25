@@ -4,7 +4,7 @@
       <button class="lp button is-info" @click.prevent="openModuleList">
         Dodaj moduł
       </button>
-      <button class="lp button is-success" type="submit">
+      <button class="lp button is-success" type="submit" name="update">
         Zapisz zmiany
       </button>
 
@@ -115,5 +115,13 @@ export default {
 .lp.button {
   box-shadow: none;
   border: none;
+}
+
+.control {
+  margin: 2rem 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 </style>
