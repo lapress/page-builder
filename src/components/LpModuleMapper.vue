@@ -13,7 +13,7 @@
 <script>
 import Draggable from 'vuedraggable';
 
-import { config } from '@lapress/frontend-core';
+import {config} from '@lapress/frontend-core';
 
 export default {
   name: 'LpSectionMapper',
